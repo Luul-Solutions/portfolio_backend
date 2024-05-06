@@ -1,0 +1,23 @@
+curl -X POST -H "Content-Type: application/json" -d '{
+  "name": "John Doe",
+  "bio": "Software developer with expertise in React and Node.js.",
+  "location": "New York",
+  "nationality": "American",
+  "availability": true,
+  "dateOfBirth": "1990-05-15",
+  "email": "john.doe@example.com",
+  "phone": "+1234567890",
+  "address": "123 Main St, New York, NY",
+  "github": "https://github.com/johndoe",
+  "twitter": "https://twitter.com/johndoe",
+  "linkedin": "https://www.linkedin.com/in/johndoe",
+  "expectedSalary": 100000,
+  "ownACar": true,
+  "haveDrivingLicense": true,
+  "noticePeriod": 30,
+  "immigrationStatus": "Citizen",
+  "referees": "John Smith, Jane Doe",
+  "willingToRelocate": true,
+  "languages": "English, Spanish",
+  "skills": "React, Node.js, JavaScript"
+}' http://localhost:3000/profile
