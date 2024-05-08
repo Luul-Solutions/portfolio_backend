@@ -1,15 +1,35 @@
 // src/routes/profileRoutes.ts
 
-import express from "express";
-import { Request, Response } from "express";
-import {
-  createProfile,
-  getProfiles,
-  updateProfile,
-  deleteProfile,
-} from "../controllers/profileController";
+import express, { Request, Response, NextFunction } from 'express'; // Import NextFunction from express
 
+import { createProfile, getProfiles, updateProfile, deleteProfile } from '../controllers/profileController';
+import jwt, { JwtPayload } from "jsonwebtoken";
 const router = express.Router();
+
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: JwtPayload; // Define user property on Request object
+    }
+  }
+}
+
+const verifyToken = (req: Request, res: Response, next: NextFunction) => {
+  const token = req.headers["authorization"];
+
+  if (!token) {
+    return res.status(401).send("Access denied. Token is not provided.");
+  }
+
+  try {
+    const decoded = jwt.verify(token, "your_secret_key");
+    req.user = decoded;
+    next();
+  } catch (err) {
+    res.status(400).send("Invalid token.");
+  }
+};
 
 /**
  * @openapi
@@ -32,8 +52,7 @@ const router = express.Router();
  *       '500':
  *         description: Internal Server Error
  */
-router.post("/profile", createProfile);
-
+router.post("/profile", verifyToken, createProfile);
 /**
  * @openapi
  * /api/profile:
@@ -51,7 +70,7 @@ router.post("/profile", createProfile);
  *       '500':
  *         description: Internal Server Error
  */
-router.get("/profile", getProfiles);
+router.get("/profile", verifyToken, getProfiles);
 
 /**
  * @openapi
@@ -81,7 +100,7 @@ router.get("/profile", getProfiles);
  *       '500':
  *         description: Internal Server Error
  */
-router.put("/profile/:id", updateProfile);
+router.put('/profile/:id', updateProfile);
 
 /**
  * @openapi
@@ -101,6 +120,6 @@ router.put("/profile/:id", updateProfile);
  *       '500':
  *         description: Internal Server Error
  */
-router.delete("/profile/:id", deleteProfile);
+router.delete('/profile/:id', deleteProfile);
 
 export default router;

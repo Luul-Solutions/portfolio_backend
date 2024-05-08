@@ -1,20 +1,21 @@
 {
-    "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs",
-      "outDir": "./dist",
-      "rootDir": "./src",
-      "baseUrl": "./src", // Set the base URL for module resolution
-      "esModuleInterop": true,
-      "experimentalDecorators": true,
-      "emitDecoratorMetadata": true,
-      "strict": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true,
-      "types": ["node"],
-      "paths": {
-        "*": ["../node_modules/*", "types/*"] // Adjust paths to align with the new baseUrl
-      }
-    },
-    "include": ["**/*"]
-  }
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "../dist", // Adjusted outDir path relative to baseUrl
+    "rootDir": ".", // rootDir should be relative to baseUrl
+    "baseUrl": ".", // Set the base URL for module resolution
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strict": true,
+    "strictNullChecks": true, // Add strictNullChecks for safer code
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node"],
+    "paths": {
+      "*": ["../node_modules/*", "types/*"] // Adjust paths to align with the new baseUrl
+    }
+  },
+  "include": ["**/*"]
+}
