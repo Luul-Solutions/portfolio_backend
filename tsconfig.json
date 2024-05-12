@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "outDir": "../dist", // Adjusted outDir path relative to baseUrl
-    "rootDir": ".", // rootDir should be relative to baseUrl
+    "outDir": "./dist", // Adjusted outDir path relative to baseUrl
+    "rootDir": "./src", // rootDir should be relative to baseUrl
     "baseUrl": ".", // Set the base URL for module resolution
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -17,5 +17,6 @@
       "*": ["../node_modules/*", "types/*"] // Adjust paths to align with the new baseUrl
     }
   },
-  "include": ["**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

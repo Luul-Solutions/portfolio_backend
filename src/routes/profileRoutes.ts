@@ -1,11 +1,15 @@
 // src/routes/profileRoutes.ts
 
-import express, { Request, Response, NextFunction } from 'express'; // Import NextFunction from express
+import express, { Request, Response, NextFunction } from "express"; // Import NextFunction from express
 
-import { createProfile, getProfiles, updateProfile, deleteProfile } from '../controllers/profileController';
+import {
+  createProfile,
+  getProfiles,
+  updateProfile,
+  deleteProfile,
+} from "../controllers/profileController";
 import jwt, { JwtPayload } from "jsonwebtoken";
 const router = express.Router();
-
 
 declare global {
   namespace Express {
@@ -23,7 +27,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   }
 
   try {
-    const decoded = jwt.verify(token, "your_secret_key");
+    const decoded = jwt.verify(token, "your_secret_key") as JwtPayload;
     req.user = decoded;
     next();
   } catch (err) {
@@ -100,7 +104,7 @@ router.get("/profile", verifyToken, getProfiles);
  *       '500':
  *         description: Internal Server Error
  */
-router.put('/profile/:id', updateProfile);
+router.put("/profile/:id", updateProfile);
 
 /**
  * @openapi
@@ -120,6 +124,6 @@ router.put('/profile/:id', updateProfile);
  *       '500':
  *         description: Internal Server Error
  */
-router.delete('/profile/:id', deleteProfile);
+router.delete("/profile/:id", deleteProfile);
 
 export default router;
