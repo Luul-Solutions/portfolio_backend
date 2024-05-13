@@ -7,8 +7,11 @@ import swaggerJSDoc from "swagger-jsdoc";
 import swaggerSpec from "./swaggerdef";
 
 const app = express();
+const cors = require("cors");
 
 app.use(express.json());
+
+app.use(cors());
 
 app.use(profileRoutes);
 // Add other route middlewares similarly

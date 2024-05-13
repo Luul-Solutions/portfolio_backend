@@ -20,4 +20,4 @@ curl -X POST -H "Content-Type: application/json" -d '{
   "willingToRelocate": true,
   "languages": "English, Spanish",
   "skills": "React, Node.js, JavaScript"
-}' http://localhost:3000/profile
+}' http://localhost:3000/api/profile

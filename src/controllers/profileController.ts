@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import  { Profile } from "../models/Profile";
+import { Profile } from "../models/Profile";
 
 export const createProfile = async (req: Request, res: Response) => {
   try {
@@ -18,6 +18,23 @@ export const getProfiles = async (req: Request, res: Response) => {
   try {
     const profiles = await Profile.findAll();
     res.send(profiles);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(500).send(error.message);
+    } else {
+      res.status(500).send("Unknown error");
+    }
+  }
+};
+
+export const getProfileById = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const profile = await Profile.findOne({ where: { id } });
+    if (!profile) {
+      return res.status(404).send("Profile not found");
+    }
+    res.send(profile);
   } catch (error: unknown) {
     if (error instanceof Error) {
       res.status(500).send(error.message);
